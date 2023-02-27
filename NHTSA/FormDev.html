@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css"  rel="stylesheet" />
+
+    <style  type="text/tailwindcss">
+       .survey-col{
+          @apply col-span-2 md:col-span-1 border-b border-slate-200;
+       }
+       .survey-colQuestion{
+          @apply col-span-2 md:col-span-1 border-b border-slate-200 text-slate-600 bg-white px-5 py-2;
+       }
+       .surevy-Q{
+          @apply text-slate-600 bg-white px-5 py-2 font-semibold;
+       }
+       .surveyRadio{
+         @apply flex items-center mr-4 pb-1;
+       }
+       .surveyRadio > input{
+         @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
+       }
+       .surveyRadio > label{
+         @apply ml-2 text-xs font-medium text-gray-900 dark:text-gray-300;
+       }
+       .survey-sr{
+         @apply font-normal md:sr-only md:hidden;
+    
+       }
+      #survey-table{
+        @apply grid grid-cols-2 bg-slate-50 rounded-xl py-5 border border-slate-200 gap-x-px text-xs;
+      }  
+ 
+     </style>
+     <script>
+       
+         
+       
+        //const generateATSurvey = ()=>{
+          function generateATSurvey(){
+          ////get container for survey
+          var surveyTableContainer = document.getElementById("survey-table"); 
+          ////create survey HTML
+          const ATGateSurvey = ["1. Reference Tour (IRAP Website, Downloads, Catalog, KISAM/ServiceNow tour, Aternity, etc)",
+                                "2. Tour of the IRAP Tasking and tracking/support system.",
+                                "3. Installing the IRAP software homework and review after install.",
+                                "4. Assigned IRAP technicians availability for training/shadowing.",
+                                "5. Shadowing phase – effectiveness, usefulness, learn anything new?",
+                                "6. Was the Product tours of the software useful?",
+                                "7. Was the length of the Session to long? ",
+                                "8. Any additional training or content that should have been covered?",
+                                "9. Any areas where there was too much information or unnecessary?"
+                              ]
+          const surevyRatings = [
+                                `1<span class="survey-sr">. Not at all Useful/Already knew</span>`,
+                                `2<span class="survey-sr">. Slightly Useful</span>`,
+                                `3<span class="survey-sr">. Moderately Useful</span>`,
+                                `4<span class="survey-sr">. Very Useful</span>`,
+                                `5<span class="survey-sr">. Extremely Useful</span>`
+                                ]
+              var cars =['dodge','chevy','benz']   
+              
+              ATGateSurvey.forEach(function(sQuestion,indexNumber){
+                
+                console.log("Main Questiomn:"+sQuestion)
+                       surevyRatings.forEach(function(radioOpt){
+                          console.log(radioOpt)
+                       })
+
+                   })
+                               
+
+                                var surveyQuestions ="";  
+                                var questionCount =0;
+                                ATGateSurvey.forEach((questionOption)=>{  
+                                                      questionCount +=1;
+                                                    ////generate ratings scale html
+                                                    var surveyRatingScale =""; 
+                                                    var surveyRatingCount =0;
+                                                    surevyRatings.forEach((ratingRadio)=>{  
+                                                      surveyRatingCount+=1;                                
+                                                      var ratingsRadioButtons = `<div class="surveyRadio">
+                                                                                    <input id="Q`+questionCount+`rating-radio`+surveyRatingCount+`" type="radio" value="" name="surveyQuestion`+questionCount+`Ratings" >
+                                                                                    <label for="Q`+questionCount+`rating-radio`+surveyRatingCount+`" >`+ratingRadio+`</label>
+                                                                                </div>`;
+
+                                                      surveyRatingScale += ratingsRadioButtons;
+                                                  })  
+
+                                  //////create survey question column
+                                        surveyQuestions +=`
+                                        <div class="survey-col">
+                                            <h3 class="surevy-Q">`+questionOption+`</h3>
+                                          </div>
+                                          <div class="survey-colQuestion" >
+                                            <div class="flex flex-wrap">`+ 
+                                            surveyRatingScale+
+                                            '</div>'+
+                                          '</div>' 
+                                });                      
+                               
+          ////append html
+              surveyTableContainer.innerHTML += surveyQuestions;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+        generateATSurvey()
+       
+        });
+
+
+     </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center " >
+  
+    <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center ">
+      <div class="container max-w-screen-lg mx-auto">
+    <div>
+      <h1 class="font-semibold text-xl text-gray-600">IRAP AT Gate Training Debriefs</h1>
+      <p class="text-gray-500 mb-6">Please provide honest feedback to help us conduct a productive Training. <a href="#" class="text-blue-500 no-underline hover:underline">View submitted Surveys.</a></p>
+
+      <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+          <div class="text-gray-600 pr-4">
+            
+            <div class="bg-blue-100 border-t border-b border-blue-500  px-4 py-3" role="alert">
+                <h2 class="font-medium text-lg">Details and Survey</h2>
+                <p class="text-sm">Please fill out all the fields. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+              </div>          
+            </div>
+
+          <div class="lg:col-span-2">
+            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+              <div class="md:col-span-5">
+                <label for="full_name">Name: (Opttional)</label>
+                <input type="email" autocomplete="email"  id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="email@irs.gov" value="" />
+              </div>
+
+             
+
+              <div class="md:col-span-5">
+                <label for="shadowpoc">IRAP Tech Assigned to Shadow</label>
+                <input type="email" autocomplete="email"  id="shadowpoc" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="email@irs.gov" />
+              </div>
+
+              <div class="col-span-full">
+                <p aria-hidden="true" class="text-xs font-sm hidden md:block" ><b>Rating System:</b> 1 = Not at all Useful/Already knew, 2 = Slightly Useful, 3 = Moderately Useful, 4 = Very Useful, 5 = Extremely Useful
+                    </p>        
+              </div>
+
+              <div class="col-span-full">
+                <div id="survey-table"  >
+                    <div class="col-span-2 md:col-span-1 border-b border-slate-200  font-bold text-blue-600 align-middle px-5 pb-3 text-md">Questions</div>
+                    <div class="col-span-2 md:col-span-1 border-b border-slate-200 text-blue-600 font-bold hidden md:block align-middle px-5 text-md" >Rating</div>
+
+                    
+                </div>
+              </div>
+
+              <div class="col-span-full">                 
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional Comments or Suggestions:</label>
+                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+
+
+              </div>
+
+
+             
+
+              
+
+           
+      
+              <div class="md:col-span-5 text-right">
+                <div class="inline-flex items-end">
+                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#"  class="bottom-0 right-0 p-4 float-right">
+        <span class="sr-only">Return to IRAP Home page.</span>
+      <img src="https://th.bing.com/th/id/OIP.ZSrFp930BH17vBTEG9rmHwHaE8?pid=ImgDet&rs=1" aria-hidden="true" alt="IRS Logo" class="transition-all rounded-full w-14  hover:shadow-sm shadow-lg ring hover:ring-4 ring-white">
+    </a>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+
+</body>
+</html>
